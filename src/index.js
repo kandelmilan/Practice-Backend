@@ -7,13 +7,14 @@ dotenv.config();
 const port = process.env.PORT ;
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/Practice")
+
+mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
         console.log("Database connection successful hello ");
-        app.listen(8001, () => {
+        app.listen(port, () => {
             console.log(`Server is serving at port  yessss ${port}`);
         });
     })
     .catch((err) => {
-        console.error("Database connection error:", err.message);
+        console.log("Error in DataBase connection");
     });
