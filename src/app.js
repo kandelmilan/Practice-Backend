@@ -1,9 +1,25 @@
-const express = require("express");
+const express = require("express")
+const { login, signup } = require("../controller/user.controller")
+const { isAdmin, isAuthenticated } = require("../middleware/auth")
+const router = express.Router()
 
-const app = express()
-
-app.get("/", (req, res) => {
-    res.status(200).send("Server is Serving ")
+router.get("/user", (req, res) => {
+    res.status(200).send("response from user")
 })
 
-module.exports = app
+
+
+router.post("/user/login", login)
+router.post("/user/signup", signup)
+
+router.patch("/user/:id", isAuthenticated, (req, res) => {
+    console.log("hello form update")
+    res.send("User updated")
+})
+
+
+// router.delete("/user/:id", () => { }
+
+// )
+
+module.exports = router
