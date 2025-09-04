@@ -1,22 +1,27 @@
-const { string } = require("joi")
-const mongoose=require("mongoose")
+const mongoose = require("mongoose")
 
-const UserSchema=mongoose.Schema({
-    username:{
-        type:String,
-        required
+const userSchema = mongoose.Schema({
+    username: {
+        type: String,
+        required: true
     },
-    email:{
-        type:String
+    password: {
+        type: String,
+
     },
-    password:{
-        type:String
+    email: {
+        type: String,
+
     },
-    
+    role: {
+        type: String,
+        enum: ["buyer", "seller", "superadmin"],
+        default: "seller"
+    },
+
 })
-const User=mongoose.model("User",UserSchema)
 
-module.exports={
-    User
-}
 
+
+const User = mongoose.model("User", userSchema)
+module.exports = User
